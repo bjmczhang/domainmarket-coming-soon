@@ -462,7 +462,7 @@
         event.preventDefault();
         const btn = event.target.querySelector("button[type=submit]");
         btn.disabled = true;
-        btn.innerText = "Sending..."; // ✅ 显示加载状态
+        btn.innerText = "Sending...";
 
         emailjs
           .sendForm("service_ezfko64", "template_ycdw0sc", event.target)
@@ -470,13 +470,13 @@
             function () {
               alert("✅ Sign up successfully!");
               btn.disabled = false;
-              btn.innerText = "Notify Me!"; // ✅ 恢复原状
-              event.target.reset(); // 清空表单
+              btn.innerText = "Notify Me!";
+              event.target.reset();
             },
             function (error) {
               alert("❌ Failed to sign up: " + JSON.stringify(error));
               btn.disabled = false;
-              btn.innerText = "Notify Me!"; // ✅ 恢复原状
+              btn.innerText = "Notify Me!";
             }
           );
       }

@@ -458,53 +458,64 @@
         emailjs.init("FHWh9CJi9Mja77sD3");
       })();
 
+      // Notify Me
       function notify(event) {
         event.preventDefault();
-        const btn = event.target.querySelector("button[type=submit]");
+        const form = event.target;
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const btn = form.querySelector("button[type=submit]");
         btn.disabled = true;
         btn.innerText = "Sending...";
 
-        emailjs
-          .sendForm("service_ezfko64", "template_ycdw0sc", event.target)
-          .then(
-            function () {
-              alert("✅ Sign up successfully!");
-              btn.disabled = false;
-              btn.innerText = "Notify Me!";
-              event.target.reset();
-            },
-            function (error) {
-              alert("❌ Failed to sign up: " + JSON.stringify(error));
-              btn.disabled = false;
-              btn.innerText = "Notify Me!";
-            }
-          );
+        emailjs.sendForm("service_ezfko64", "template_ycdw0sc", form).then(
+          function () {
+            alert("✅ Sign up successfully!");
+            btn.disabled = false;
+            btn.innerText = "Notify Me!";
+            form.reset();
+          },
+          function (error) {
+            alert("❌ Failed to sign up: " + JSON.stringify(error));
+            btn.disabled = false;
+            btn.innerText = "Notify Me!";
+          }
+        );
       }
 
+      // Contact
       function sendMail(event) {
         event.preventDefault();
-        const btn = event.target.querySelector("button[type=submit]");
+        const form = event.target;
+
+        if (!form.checkValidity()) {
+          form.reportValidity();
+          return;
+        }
+
+        const btn = form.querySelector("button[type=submit]");
         btn.disabled = true;
         btn.innerText = "Sending...";
 
-        emailjs
-          .sendForm("service_ezfko64", "template_z492pkj", event.target)
-          .then(
-            function () {
-              alert("✅ Message sent successfully!");
-              btn.disabled = false;
-              btn.innerText = "Send Message";
-              event.target.reset();
-            },
-            function (error) {
-              alert("❌ Failed to send message: " + JSON.stringify(error));
-              btn.disabled = false;
-              btn.innerText = "Send Message";
-            }
-          );
+        emailjs.sendForm("service_ezfko64", "template_z492pkj", form).then(
+          function () {
+            alert("✅ Message sent successfully!");
+            btn.disabled = false;
+            btn.innerText = "Send Message";
+            form.reset();
+          },
+          function (error) {
+            alert("❌ Failed to send message: " + JSON.stringify(error));
+            btn.disabled = false;
+            btn.innerText = "Send Message";
+          }
+        );
       }
-    </script>
-    <script>
+
       document.getElementById("copyright-year").textContent =
         new Date().getFullYear();
     </script>
